@@ -20,7 +20,17 @@ This Repo is the official implementatation of [DNABERT_S: Learning Species-Aware
 
 ## 1. Introduction
 
+![embedding_visualization](/Users/ZZH/Northwestern/Research/DNABERT_S/embedding_visualization.png)
+
 DNABERT-S is a foundation model based on [DNABERT-2](https://github.com/Zhihan1996/DNABERT_2) specifically designed for generating DNA embedding that naturally clusters and segregates genome of different species in the embedding space, which can greatly benefit a wide range of genome applications, including species classification/identification, metagenomics binning, and understanding evolutionary relationships.
+
+
+
+Results on species clustering.
+
+![image-20240214211657375](/Users/ZZH/Northwestern/Research/DNABERT_S/image-20240214211657375.png)
+
+
 
 
 
