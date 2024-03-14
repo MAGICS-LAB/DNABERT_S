@@ -9,6 +9,8 @@ import torch.nn as nn
 from textaugment import EDA
 from tqdm import tqdm
 from utils.contrastive_utils import HardConLoss, iMIXConLoss
+# enable logging to W&B
+import wandb
 
 class Trainer(nn.Module):
     def __init__(self, model, tokenizer, optimizer, train_loader, val_loader, args):
@@ -137,6 +139,9 @@ class Trainer(nn.Module):
                 losses = self.imix_loss(feat1, feat2, mix_rand_list, mix_lambda)
                 loss = losses["instdisc_loss"]
         
+        # log to wandb
+        wandb.log({"loss": loss})
+    
         loss.backward()
         self.optimizer.step()
         self.optimizer.zero_grad()
@@ -197,6 +202,8 @@ class Trainer(nn.Module):
                         losses = self.hard_loss(feat1, feat2, pairsimi)
                         val_loss += losses["instdisc_loss"]
             val_loss = val_loss.item()/(j+1)
+            # log to wandb
+            wandb.log({"val_loss": val_loss})
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 best_checkpoint = step

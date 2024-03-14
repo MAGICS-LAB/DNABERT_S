@@ -16,6 +16,8 @@ from dataloader.dataloader import pair_loader_csv
 from utils.utils import set_global_random_seed, setup_path
 from utils.optimizer import get_optimizer
 from models.dnabert_s import DNABert_S
+# enable logging to W&B
+import wandb
 
 def run(args):
     args.resPath = setup_path(args)
@@ -38,10 +40,21 @@ def run(args):
     model = nn.DataParallel(model)
     model.to(device)
     
+    # start a new wandb run to track this script
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="dna_bert_s",
+        # track hyperparameters and run metadata
+        config=args
+    )
+
     # set up the trainer
     trainer = Trainer(model, tokenizer, optimizer, train_loader, val_loader, args)
     trainer.train()
     trainer.val()
+
+    wandb.finish()
+    
     return None
 
 def get_args(argv):
@@ -73,11 +86,11 @@ def get_args(argv):
     parser.add_argument('--mix_layer_num', type=int, default=-1, help="Which layer to perform i-Mix, if the value is -1, it means manifold i-Mix")
     parser.add_argument('--curriculum', action="store_true", help="Whether use curriculum learning")
     
-    
     args = parser.parse_args(argv)
     args.use_gpu = args.gpuid[0] >= 0
     args.resPath = None
     args.tensorboard = None
+
     return args
 
 if __name__ == '__main__':
