@@ -47,7 +47,7 @@ To download the model from command line:
 ```
 # command line
 gdown 1ejNOMXdycorDzphLT6jnfGIPUxi6fO0g # pip install gdown
-unzip dnabert-s_train.zip  # unzip the data 
+unzip DNABERT-S.zip  # unzip the model
 ```
 
 
