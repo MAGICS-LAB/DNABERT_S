@@ -17,6 +17,10 @@ This Repo is the official implementatation of [DNABERT_S: Learning Species-Aware
 - [7. Citation](#7-citation)
 
 
+## Update (2025/12/09)
+
+We introduced GenomeOcean, a generative foundation model to uncover the genomic manifold. Please check it out [here](https://www.biorxiv.org/content/10.1101/2025.01.30.635558v2) if you are interested.
+
 
 ## 1. Introduction
 
